@@ -13,19 +13,21 @@
                             <mat-label>From</mat-label>
                             <mat-select formControlName="from">
                                 <mat-option *ngFor="let symbol of availableCurrencies | keyvalue"
-                                    [value]="symbol.key">{{symbol.key + ' : '
-                                    +symbol.value}}</mat-option>
+                                    [value]="symbol.key">
+                                    {{symbol.key + ' : ' +symbol.value}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <span class="col-2 d-inline-flex justify-content-center">
-                            <mat-icon>sync_alt</mat-icon>
+                            <button mat-mini-fab (click)="swap()" title="Swap Currencies"><mat-icon>sync_alt</mat-icon></button>
                         </span>
                         <mat-form-field appearance="outline" class="col-5">
                             <mat-label>To</mat-label>
                             <mat-select formControlName="to">
                                 <mat-option *ngFor="let symbol of availableCurrencies | keyvalue"
-                                    [value]="symbol.key">{{symbol.key + ' : '
-                                    +symbol.value}}</mat-option>
+                                    [value]="symbol.key">
+                                    {{symbol.key + ' : ' +symbol.value}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -34,8 +36,8 @@
                     <span class="col-6"></span>
                     <div class="col-sm-12 col-md-6">
                         <button mat-raised-button color="primary" class="w-100"
-                                (click)="convert()" [disabled]="currencyForm.invalid">
-                                Convert
+                                (click)="convert()" [disabled]="currencyForm.invalid || (isLoading$|async)">
+                            Convert
                         </button>
                     </div>
                 </div>

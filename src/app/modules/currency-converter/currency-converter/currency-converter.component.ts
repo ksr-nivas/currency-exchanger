@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CurrencyConverterService } from '../services/currency-converter.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
-import { Observable } from 'rxjs';
 import { IConvertedCurrency } from 'src/app/shared/models/converted-currency.model';
 
 @Component({
@@ -41,13 +41,21 @@ export class CurrencyConverterComponent implements OnInit {
     })
   }
 
+  swap() {
+    const {to, from} = this.currencyForm.value;
+    this.currencyForm.get('from')?.setValue(to);
+    this.currencyForm.get('to')?.setValue(from);
+  }
+
   convert() {
     const {to, from, amount} = this.currencyForm.value;
     if(!to || !from || !amount) {
       return;
     }
     this.currencyConverterService.convert(to, from, amount)
-        .pipe(take(1))
+        .pipe(
+          take(1)
+        )
         .subscribe(response => {
           this.convertedResult = response;
         })
