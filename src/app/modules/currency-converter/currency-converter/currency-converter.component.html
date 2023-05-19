@@ -1,0 +1,61 @@
+<mat-card class="currency-converter-card w-100">
+    <mat-card-content>
+        <form [formGroup]="currencyForm" class="w-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <mat-form-field appearance="outline" class="col-sm-12 col-md-6 col-lg-6">
+                        <mat-label>Amount</mat-label>
+                        <input matInput type="number" placeholder="Amount" formControlName="amount">
+                        <mat-error *ngIf="currencyForm.get('amount')?.errors">Please enter a minimum value: 1</mat-error>
+                    </mat-form-field>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <mat-form-field appearance="outline" class="col-5">
+                            <mat-label>From</mat-label>
+                            <mat-select formControlName="from">
+                                <mat-option *ngFor="let symbol of availableCurrencies | keyvalue"
+                                    [value]="symbol.key">{{symbol.key + ' : '
+                                    +symbol.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <span class="col-2 d-inline-flex justify-content-center">
+                            <mat-icon>sync_alt</mat-icon>
+                        </span>
+                        <mat-form-field appearance="outline" class="col-5">
+                            <mat-label>To</mat-label>
+                            <mat-select formControlName="to">
+                                <mat-option *ngFor="let symbol of availableCurrencies | keyvalue"
+                                    [value]="symbol.key">{{symbol.key + ' : '
+                                    +symbol.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="col-6"></span>
+                    <div class="col-sm-12 col-md-6">
+                        <button mat-raised-button color="primary" class="w-100"
+                                (click)="convert()" [disabled]="currencyForm.invalid">
+                                Convert
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center align-items-center">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <button mat-stroked-button class="w-100">{{convertedResult?.info?.rate || 1.08}}</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 mt-1">
+                        <button mat-stroked-button class="col-7 h-50px">{{convertedResult?.result || 1.08}}</button>
+                        <span class="col-1 d-inline-block"></span>
+                        <button mat-raised-button color="primary" class="col-4">More Details</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+
+    <mat-divider inset></mat-divider>
+
+    <mat-card-footer>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>

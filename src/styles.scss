@@ -1,1 +1,23 @@
+@import "bootstrap/scss/bootstrap";
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.border {
+  border: 1px solid #fff
+}
