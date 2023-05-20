@@ -1,1 +1,5 @@
-<p>currency-details works!</p>
+<div class="details">
+    <app-currency-converter [type]="'details'" [title]="title$ | async"></app-currency-converter>
+    <!-- Chart -->
+    <app-history-chart></app-history-chart>
+</div>

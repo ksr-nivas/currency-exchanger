@@ -11,13 +11,13 @@ export class CurrencyInterceptor implements HttpInterceptor {
     constructor(private sharedService: SharedService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.sharedService.setLoading(true);
+        this.sharedService.setLoader(true);
         if(req.method !== "GET") {
-            return next.handle(req).pipe(finalize(() => this.sharedService.setLoading(false)));
+            return next.handle(req).pipe(finalize(() => this.sharedService.setLoader(false)));
         }
         const cachedResponse: HttpResponse<any> = this.cache.get(req.urlWithParams)
         if(cachedResponse) {
-            this.sharedService.setLoading(false);
+            this.sharedService.setLoader(false);
             return of(cachedResponse.clone());
         } else {
             const headers = req.headers
@@ -35,7 +35,7 @@ export class CurrencyInterceptor implements HttpInterceptor {
                     console.log(error);
                     return EMPTY;
                 }),
-                finalize(() => this.sharedService.setLoading(false))
+                finalize(() => this.sharedService.setLoader(false))
             );
         }
     }

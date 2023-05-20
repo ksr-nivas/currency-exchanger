@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { HistoryChartComponent } from 'src/app/components/history-chart/history-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
     CurrencyConverterComponent,
     PopularCurrencyComponent,
     CurrencyDetailsComponent,
+    HistoryChartComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatSelectModule,
     CurrencyRoutingModule,
+    NgChartsModule
   ],
 })
 export class CurrencyConverterModule {}

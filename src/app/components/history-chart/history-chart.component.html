@@ -1,0 +1,16 @@
+<mat-card class="w-100">
+    <mat-card-header>
+        <mat-card-title>History</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <canvas baseChart class="w-100 p-2" height="400"
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend">
+        </canvas>
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>

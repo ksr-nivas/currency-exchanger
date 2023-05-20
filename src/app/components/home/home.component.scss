@@ -1,0 +1,16 @@
+.currency-container {
+    overflow: auto;
+    height: 48vh;
+}
+
+@media only screen and (min-width: 600px) {
+    .currency-container {
+        height: 45vh;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .currency-container {
+        height: 52vh;
+    }
+}

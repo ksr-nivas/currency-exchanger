@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-currency-details',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrencyDetailsComponent implements OnInit {
 
-  constructor() { }
+  title$!: Observable<string>;
+
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.title$ = this.sharedService.getFrom();
   }
 
 }

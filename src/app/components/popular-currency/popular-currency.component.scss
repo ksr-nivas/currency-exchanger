@@ -1,0 +1,17 @@
+.currency-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 0 1rem;
+}
+
+@media only screen and (min-width: 500px) {
+    .currency-grid {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .currency-grid {
+        grid-template-columns: repeat(3, auto);
+    }
+}

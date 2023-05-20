@@ -1,1 +1,14 @@
-<p>popular-currency works!</p>
+<h3 class="m-2 ms-3">Popular Currencies</h3>
+<div class="currency-grid">
+    <mat-card *ngFor="let currency of popularCurrencies | keyvalue; trackBy: trackByFn">
+        <mat-card-header>
+            <mat-card-title>{{currency.key}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <button mat-raised-button>{{currency.value}}</button>
+        </mat-card-content>
+        <mat-card-footer>
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+</div>
