@@ -1,6 +1,6 @@
 <h3 class="m-2 ms-3">Popular Currencies</h3>
 <div class="currency-grid">
-    <mat-card *ngFor="let currency of popularCurrencies | keyvalue; trackBy: trackByFn">
+    <mat-card appearance="outlined" *ngFor="let currency of popularCurrencies | keyvalue; trackBy: trackByFn">
         <mat-card-header>
             <mat-card-title>{{currency.key}}</mat-card-title>
         </mat-card-header>

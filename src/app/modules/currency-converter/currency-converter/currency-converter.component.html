@@ -2,7 +2,7 @@
     <span>{{title}}</span>
     <button mat-raised-button color="primary" *ngIf="type === 'details'" (click)="backToHome()">Back to Home</button>
 </div>
-<mat-card class="currency-converter-card w-100">
+<mat-card appearance="outlined" class="currency-converter-card w-100">
     <mat-card-content>
         <form [formGroup]="currencyForm" class="w-100">
             <div class="container-fluid">
