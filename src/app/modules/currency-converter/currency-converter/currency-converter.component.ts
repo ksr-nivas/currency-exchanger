@@ -1,11 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CurrencyConverterService } from '../services/currency-converter.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { IConvertedCurrency } from 'src/app/shared/models/converted-currency.model';
 import { Router } from '@angular/router';
+
+export interface FormModel {
+  amount: FormControl<number | null>;
+  from: FormControl<string | null | undefined>;
+  to: FormControl<string | null | undefined>;
+}
 
 @Component({
   selector: 'app-currency-converter',
@@ -15,7 +21,7 @@ import { Router } from '@angular/router';
 export class CurrencyConverterComponent implements OnInit {
   @Input() type: 'converter' | 'details' = 'converter';
   @Input() title: string | null = 'Currency Exchanger';
-  currencyForm!: FormGroup;
+  currencyForm!: FormGroup<FormModel>;
   availableCurrencies = {};
   isLoading$!: Observable<boolean>;
   convertedResult!: IConvertedCurrency;
@@ -33,10 +39,10 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   private buildForm() {
-    this.currencyForm = this.fb.group({
-      amount: [1, [Validators.required, Validators.min(1)]],
-      from: 'EUR',
-      to: 'USD',
+    this.currencyForm = this.fb.group<FormModel>({
+      amount: this.fb.control<number | null>(1, {validators: [Validators.required, Validators.min(1)]}),
+      from: this.fb.control<string | null>('EUR'),
+      to: this.fb.control<string | null>('USD'),
     });
 
     if(this.type === 'details') {
@@ -79,7 +85,7 @@ export class CurrencyConverterComponent implements OnInit {
     if(!to || !from || !amount) {
       return;
     }
-    
+
     this.canEnableDetails = true;
     this.sharedService.setTo(to);
     this.sharedService.setFrom(from);

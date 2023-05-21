@@ -2,7 +2,7 @@
     <mat-card-header>
         <mat-card-title>History</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="d-flex justify-content-center w-100">
+    <mat-card-content class="card-content">
         <canvas baseChart class="w-75 p-2 pb-5" height="400" *ngIf="!(isLoading$ | async)"
             [type]="'line'"
             [data]="lineChartData"
